@@ -11,10 +11,7 @@ if file is not None:
     df = pd.read_csv(file)
     df = df.fillna(0)
     
-    le = LabelEncoder()
-    for col in df.columns:
-        if df[col].dtype == 'object':
-            df[col] = le.fit_transform(df[col])
+  df = pd.get_dummies(df)
     
     X = df.drop(['Risk', 'Risk_3Class'], axis=1)
     y = df['Risk']
