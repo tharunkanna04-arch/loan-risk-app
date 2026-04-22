@@ -29,11 +29,11 @@ if file is not None:
 
     # ── Step 2: Fill missing values AFTER dtype fix ───────────────────────────
     for col in df.columns:
-        if df[col].dtype == "object":
+        if pd.api.types.is_numeric_dtype(df[col]):
+            df[col] = df[col].fillna(df[col].median())
+        else:
             mode_val = df[col].mode()
             df[col] = df[col].fillna(mode_val.iloc[0] if not mode_val.empty else "missing")
-        else:
-            df[col] = df[col].fillna(df[col].median())
 
     # ── Step 3: Choose target column ─────────────────────────────────────────
     if "Risk_3Class" in df.columns:
