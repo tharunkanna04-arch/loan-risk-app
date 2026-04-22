@@ -9,7 +9,7 @@ file = st.file_uploader("Upload your dataset", type=["csv"])
 
 if file is not None:
     df = pd.read_csv(file)
-    df = df.fillna(method='ffill')
+    df = df.fillna(0)
     
     le = LabelEncoder()
     for col in df.columns:
