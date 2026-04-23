@@ -32,6 +32,9 @@ def make_onehot():
 
 
 def choose_target(df: pd.DataFrame):
+    # normalize column names
+    df.columns = df.columns.str.strip().str.replace(" ", "_")
+
     for col in ["Risk", "Risk_3Class", "Repayment_Status"]:
         if col in df.columns:
             vals = df[col].dropna().astype(str).str.strip()
